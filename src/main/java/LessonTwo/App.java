@@ -1,4 +1,4 @@
-package org.example;
+package LessonTwo;
 
 /**
  * GeekBrains/UI-autotests/Lesson2/!
