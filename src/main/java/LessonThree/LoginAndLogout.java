@@ -8,13 +8,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.concurrent.TimeUnit;
+
 
 
 public class LoginAndLogout {
 
-        public static void main(String[] args) throws InterruptedException
+        public static void main(String[] args)
         {
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.addArguments("--blink-settings=imagesEnabled=false");
@@ -24,7 +24,7 @@ public class LoginAndLogout {
             webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
             webDriver.get("https://www.e-katalog.ru/");
 
-            webDriver.manage().window().setSize(new Dimension(1200, 820));
+            webDriver.manage().window().setSize(new Dimension(800, 1200));
 
             webDriver.findElement(By.cssSelector(".wu_entr > em")).click();
             webDriver.findElement(By.cssSelector(".signin-with-ek")).click();
@@ -37,8 +37,9 @@ public class LoginAndLogout {
             webDriver.findElement(By.xpath("//a[contains(@class,'help2')]")).click();
 
 
+            new WebDriverWait (webDriver, 5).until(ExpectedConditions.visibilityOf(webDriver.findElement(By.xpath("//*[text()='Войти']"))));
 
-            new WebDriverWait(webDriver, 5).until(ExpectedConditions.visibilityOf(webDriver.findElement(By.xpath("//*[text()='Войти']"))));
+
             webDriver.quit();
 
         }
