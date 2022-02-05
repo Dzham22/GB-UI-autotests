@@ -1,69 +1,70 @@
-package LessonFore;
+ package LessonFore;
+
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import LessonFore.Providers.InvalidTriangleProvider;
-
+import java.util.List;
 import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 @DisplayName("Треугольник")
-    public class TriangleTest {
-
-    private static final Logger logger = LoggerFactory.getLogger(TriangleTest.class);
+    public class AssertJTriangleTest {
 
     @BeforeEach
     void setUp() {
-        logger.debug("BeforeEach");
+        System.out.println("BeforeEach");
     }
 
     @AfterEach
     void tearDown() {
-        logger.debug("AfterEach");
+        System.out.println("AfterEach");
     }
 
     @BeforeAll
     static void beforeAll() {
-        logger.debug("BeforeAll");
+        System.out.println("BeforeAll");
     }
 
     @AfterAll
     static void afterAll() {
-        logger.debug("AfterAll");
+        System.out.println("AfterAll");
     }
+
 
     @Test
     @DisplayName("Разносторонний треугольник - все стороны которого имеют разную длину.")
     @Disabled("Перенесены в параметризированный тест")
     public void countPerimeterVersatileTriangleTest() {
-        Triangle triangle = new Triangle(6, 8, 10);
-        int perimeter = triangle.countArea();
-        assertEquals(24, perimeter);
+        Triangle triangle = new Triangle(6, 8, 10); //Arrange
+        int perimeter = triangle.countArea(); //Act
+        assertEquals(24, perimeter); //Assert
     }
 
     @Test
     @DisplayName("Равносторонний треугольник - у которого все три стороны равны.")
     @Disabled("Перенесены в параметризированный тест")
     public void countPerimeterEquilateralTriangleTest() {
-        Triangle triangle = new Triangle(6, 6, 6);
-        int perimeter = triangle.countArea();
-        assertEquals(15, perimeter);
+        Triangle triangle = new Triangle(6, 6, 6); //Arrange
+        int perimeter = triangle.countArea(); //Act
+        assertEquals(15, perimeter); //Assert
     }
 
     @Test
     @DisplayName("Равнобедренный треугольник - у которого две стороны равны")
     @Disabled("Перенесены в параметризированный тест")
     public void countIsoscelesTriangleTest() {
-        Triangle triangle = new Triangle(7, 7, 10);
-        int perimeter = triangle.countArea();
-        assertEquals(24, perimeter);
+        Triangle triangle = new Triangle(7, 7, 10); //Arrange
+        int perimeter = triangle.countArea(); //Act
+        assertEquals(24, perimeter); //Assert
     }
+
 
     public static Stream<Arguments> triangles() {
         return Stream.of(Arguments.of(new Triangle(6, 8, 10), 24),
@@ -107,7 +108,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
         @ParameterizedTest(name = "Перекрашивание треугольника в {0}")
         @EnumSource(Triangle.Colour.class)
         public void paintTriangleTest(Triangle.Colour colour) {
-            Assumptions.assumeFalse(colour.equals(triangle.getColour()));
+            assumeFalse(colour.equals(triangle.getColour()));
             triangle.paint(colour);
             assertEquals(colour, triangle.getColour()); //Assert
         }
@@ -119,14 +120,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
             assertEquals(Triangle.Colour.valueOf(colour), triangle.getColour()); //Assert
         }
 
+    }
 
-        @ParameterizedTest
-        @ArgumentsSource(InvalidTriangleProvider.class)
-        public void perimeterInvalidTriangleNegativeTest(Triangle triangle) {
-            IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, triangle::countPerimeter);
-            assertEquals("The triangle must be valid", illegalArgumentException.getMessage());
+    @Test
+    void listWithAssertJTest() {
+        Triangle triangle = new Triangle(1, 1, 1);
+        List<Triangle> similarTriangle = triangle.createSimilarTriangles(2, 3);
 
-
-        }
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(similarTriangle).contains(new Triangle(2, 2, 3));
+        softAssertions.assertThat(similarTriangle).contains(new Triangle(3, 2, 3));
+        softAssertions.assertThat(similarTriangle).hasSize(3);
+        softAssertions.assertAll();
+//     можно заменить на это   assertThat(similarTriangles).containsExactlyInAnyOrder(new Triangle(2, 2, 2), new Triangle(3, 3, 3));
     }
 }
