@@ -1,14 +1,11 @@
-package LessonFore;
+package LessonFour;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import LessonFore.Providers.InvalidTriangleProvider;
-
+import LessonFour.Providers.InvalidTriangleProvider;
 import java.util.stream.Stream;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -40,7 +37,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
     @Test
     @DisplayName("Разносторонний треугольник - все стороны которого имеют разную длину.")
-    @Disabled("Перенесены в параметризированный тест")
     public void countPerimeterVersatileTriangleTest() {
         Triangle triangle = new Triangle(6, 8, 10);
         int perimeter = triangle.countArea();
@@ -49,7 +45,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
     @Test
     @DisplayName("Равносторонний треугольник - у которого все три стороны равны.")
-    @Disabled("Перенесены в параметризированный тест")
     public void countPerimeterEquilateralTriangleTest() {
         Triangle triangle = new Triangle(6, 6, 6);
         int perimeter = triangle.countArea();
@@ -58,8 +53,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
     @Test
     @DisplayName("Равнобедренный треугольник - у которого две стороны равны")
-    @Disabled("Перенесены в параметризированный тест")
-    public void countIsoscelesTriangleTest() {
+     public void countIsoscelesTriangleTest() {
         Triangle triangle = new Triangle(7, 7, 10);
         int perimeter = triangle.countArea();
         assertEquals(24, perimeter);
