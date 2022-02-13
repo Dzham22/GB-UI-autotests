@@ -18,19 +18,23 @@ public class LoginAndLogoutTest extends BaseTest {
     void successAuthTest() {
 
         webDriver.get("https://www.e-katalog.ru/");
-        webDriver.manage().window().setSize(new Dimension(800, 1200));
+        webDriver.manage().window().setSize(new Dimension(1200, 820));
         webDriver.findElement(By.cssSelector(".wu_entr > em")).click();
         webDriver.findElement(By.cssSelector(".signin-with-ek")).click();
 
         By authFormLocator = By.xpath("//div[contains(@id, 'mui_user_login_window')]");
         WebElement authForm = webDriver.findElement(authFormLocator);
-        authForm.findElement(By.xpath("//input[contains(@name, 'l_')]")).sendKeys("jrockiy@mail.ru");
-        authForm.findElement(By.xpath("//div[contains(@class, 'signin-password ek-form-group')]/input[contains(@name, 'pw_')]")).sendKeys("9Torres99");
-        authForm.findElement(By.xpath("//div[contains(@class, 'signin-actions ml-auto')]/button[contains(@class, 'ek-form-btn blue')]")).click();
+        authForm.findElement(By.xpath("//input[contains(@name, 'l_')]"))
+                .sendKeys("jrockiy@mail.ru");
+        authForm.findElement(By.xpath("//div[contains(@class, 'signin-password ek-form-group')]/input[contains(@name, 'pw_')]"))
+                .sendKeys("9Torres99");
+        authForm.findElement(By.xpath("//div[contains(@class, 'signin-actions ml-auto')]/button[contains(@class, 'ek-form-btn blue')]"))
+                .click();
         webDriver.findElement(By.xpath("//a[contains(@class,'help2')]")).click();
 
 
-        new WebDriverWait(webDriver, 10).until(ExpectedConditions.presenceOfElementLocated(By.linkText("Войти")));
+        new WebDriverWait(webDriver, 2)
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class, 'header_action_login')]//*[text()='Войти']")));
 
     }
 
@@ -46,14 +50,19 @@ public class LoginAndLogoutTest extends BaseTest {
 
         By authFormLocator = By.xpath("//div[contains(@id, 'mui_user_login_window')]");
         WebElement authForm = webDriver.findElement(authFormLocator);
-        authForm.findElement(By.xpath("//input[contains(@name, 'l_')]")).sendKeys("jrockiy@mail.ru");
+        authForm.findElement(By.xpath("//input[contains(@name, 'l_')]"))
+                .sendKeys("jrockiy@mail.ru");
         authForm.findElement(By.xpath("//div[contains(@class, 'signin-password ek-form-group')]/input[contains(@name, 'pw_')]"))
                 .sendKeys("JokerFace");
-        authForm.findElement(By.xpath("//div[contains(@class, 'signin-actions ml-auto')]/button[contains(@class, 'ek-form-btn blue')]")).click();
+        authForm.findElement(By.xpath("//div[contains(@class, 'signin-actions ml-auto')]/button[contains(@class, 'ek-form-btn blue')]"))
+                .click();
         webDriver.findElement(By.xpath("//a[contains(@class,'help2')]")).click();
 
+        new WebDriverWait(webDriver, 3)
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Пароль указан неверно!']")));
 
-        new WebDriverWait(webDriver, 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Пароль указан неверно!']")));
 
     }
+
+
 }

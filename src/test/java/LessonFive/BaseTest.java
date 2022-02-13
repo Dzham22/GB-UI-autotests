@@ -16,7 +16,7 @@ public class BaseTest {
     void setUp() {
 
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--blink-settings=imagesEnabled=false");
+        //chromeOptions.addArguments("--blink-settings=imagesEnabled=false");
 
         webDriver = WebDriverManager.chromedriver().capabilities(chromeOptions).create();
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
