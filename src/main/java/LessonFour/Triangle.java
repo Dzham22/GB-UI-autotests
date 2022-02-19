@@ -44,10 +44,10 @@ public class Triangle {
         return 0;
     }
 
-    public int countArea() {   // (Площадь по формуле герона)
-      int p = (a + b + c) / 2;
-        int s = (int) Math.sqrt(p * (p - a) * (p - b) * (p - c));
-        return  s;
+    public double countArea() {   // (Площадь по формуле герона)
+      double p = (a + b + c) / 2;
+        double s = (int) Math.sqrt(p * (p - a) * (p - b) * (p - c));
+        return s;
     }
 
 

@@ -39,7 +39,7 @@ import static org.junit.jupiter.api.Assumptions.assumeFalse;
     @DisplayName("Разносторонний треугольник - все стороны которого имеют разную длину.")
     public void countPerimeterVersatileTriangleTest() {
         Triangle triangle = new Triangle(6, 8, 10); //Arrange
-        int perimeter = triangle.countArea(); //Act
+        double perimeter = triangle.countArea(); //Act
         assertEquals(24, perimeter); //Assert
     }
 
@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assumptions.assumeFalse;
     @DisplayName("Равносторонний треугольник - у которого все три стороны равны.")
     public void countPerimeterEquilateralTriangleTest() {
         Triangle triangle = new Triangle(6, 6, 6); //Arrange
-        int perimeter = triangle.countArea(); //Act
+        double perimeter = triangle.countArea(); //Act
         assertEquals(15, perimeter); //Assert
     }
 
@@ -55,7 +55,7 @@ import static org.junit.jupiter.api.Assumptions.assumeFalse;
     @DisplayName("Равнобедренный треугольник - у которого две стороны равны")
     public void countIsoscelesTriangleTest() {
         Triangle triangle = new Triangle(7, 7, 10); //Arrange
-        int perimeter = triangle.countArea(); //Act
+       double perimeter = triangle.countArea(); //Act
         assertEquals(24, perimeter); //Assert
     }
 
@@ -70,7 +70,7 @@ import static org.junit.jupiter.api.Assumptions.assumeFalse;
     @ParameterizedTest(name = "Периметр треугольника {0} равен {1}")
     @MethodSource("triangles")
     public void countPerimeterTriangleTest(Triangle triangle, int expectedPerimeter) {
-        int perimeter = triangle.countArea(); //Act
+        double perimeter = triangle.countArea(); //Act
         assertEquals(expectedPerimeter, perimeter); //Assert
     }
 
