@@ -1,4 +1,4 @@
-package LessonSix.Pages;
+package LessonSeven.Pages;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
